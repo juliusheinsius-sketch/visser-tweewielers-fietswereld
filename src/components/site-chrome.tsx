@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Check, Phone, MapPin, Clock } from "lucide-react";
 import { contact, hours } from "@/lib/site";
 import type { Bike } from "@/lib/site";
+import logo from "@/assets/visser-logo.png.asset.json";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -29,7 +31,7 @@ export function useOpenStatus() {
     const ranges = today === "Gesloten" ? [] : today.split(" · ").map((r) => r.split("–").map(toMin));
     const active = ranges.find(([a, b]) => cur >= (a ?? 0) && cur < (b ?? 0));
     if (active) {
-      const end = today.split(" · ").find((r) => toMin(r.split("–")[0]!) === active[0])!.split("–")[1];
+      const end = today.split(" · ").find((r) => toMin(r.split("–")[0] ?? "") === active[0])?.split("–")[1] ?? "";
       setStatus({ open: true, label: `Nu open tot ${end}` });
     } else setStatus({ open: false, label: "Nu gesloten" });
   }, []);
@@ -56,20 +58,19 @@ export function Header() {
           ))}
         </div>
       </div>
-      <div className="bg-ink text-ink-foreground">
-        <div className="container-site flex h-20 items-center justify-between gap-6">
-          <Link to="/" className="leading-none">
-            <span className="block text-2xl font-black italic tracking-tight">VISSER<span className="text-primary">.</span></span>
-            <span className="text-xs uppercase tracking-[0.25em] opacity-70">Tweewielers · Santpoort</span>
+      <div className="bg-card text-foreground">
+        <div className="container-site flex h-24 items-center justify-between gap-4">
+          <Link to="/" aria-label="Visser Tweewielers — home" className="block w-48 shrink-0 sm:w-72">
+            <img src={logo.url} alt="Visser Tweewielers" width={764} height={160} className="h-auto w-full" />
           </Link>
           <div className="flex items-center gap-6">
             <div className="hidden lg:block"><OpenBadge /></div>
             <a href={contact.mapsHref} target="_blank" rel="noreferrer" className="hidden items-center gap-2 text-sm hover:text-primary sm:flex">
               <MapPin className="h-5 w-5 text-primary" /> Route
             </a>
-            <a href={contact.phoneHref} className="flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-accent">
+            <Button asChild className="h-11 rounded-md px-4 font-bold"><a href={contact.phoneHref}>
               <Phone className="h-4 w-4" /> <span className="hidden sm:inline">{contact.phone}</span><span className="sm:hidden">Bel</span>
-            </a>
+            </a></Button>
           </div>
         </div>
       </div>

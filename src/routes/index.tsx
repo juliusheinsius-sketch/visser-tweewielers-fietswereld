@@ -9,6 +9,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "E-bikes van Flyer, Advanced en Gocycle. Verkoop, verhuur, onderhoud en reparatie aan de Hoofdstraat in Santpoort-Noord." },
       { property: "og:title", content: "Visser Tweewielers | Flyer e-bike specialist" },
       { property: "og:description", content: "Verkoop, verhuur en reparatie van e-bikes in Santpoort-Noord." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:image", content: heroImg },
       { name: "twitter:image", content: heroImg },
     ],

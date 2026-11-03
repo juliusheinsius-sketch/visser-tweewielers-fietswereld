@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep shared brand styling in global semantic CSS tokens and use the uploaded logo asset in shared site chrome, so all pages stay consistent.
+- Workshop contact actions use the shared contact details and telephone links; do not imply an online booking is submitted without a real booking service.

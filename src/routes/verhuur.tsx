@@ -9,6 +9,8 @@ export const Route = createFileRoute("/verhuur")({
       { name: "description", content: "Huur een elektrische fiets en verken Kennemerland en de duinen. Reserveer telefonisch." },
       { property: "og:title", content: "E-bike huren | Visser Tweewielers" },
       { property: "og:description", content: "Elektrische huurfietsen in Santpoort-Noord." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
