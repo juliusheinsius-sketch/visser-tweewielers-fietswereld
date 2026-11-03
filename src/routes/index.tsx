@@ -70,7 +70,7 @@ function Index() {
           <Link to="/e-bikes" className="text-sm font-semibold text-primary underline underline-offset-4">Alle modellen →</Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[bikes[0], bikes[9], bikes[11]].map((b) => <BikeCard key={b.name} bike={b} />)}
+          {[0, 9, 11].map((i) => bikes[i]).filter((b) => b !== undefined).map((b) => <BikeCard key={b.name} bike={b} />)}
         </div>
       </section>
 
