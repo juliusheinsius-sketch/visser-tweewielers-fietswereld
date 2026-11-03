@@ -1,44 +1,98 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { Check, Phone, MapPin, Clock } from "lucide-react";
 import { contact, hours } from "@/lib/site";
 import type { Bike } from "@/lib/site";
 
 const nav = [
+  { to: "/", label: "Home" },
   { to: "/e-bikes", label: "E-bikes" },
   { to: "/verhuur", label: "Verhuur" },
   { to: "/werkplaats", label: "Werkplaats" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
+const usps = ["Officieel Flyer-dealer", "Altijd gratis proefrit", "Eigen werkplaats, alle merken", "Leenfiets bij reparatie"];
+
+function toMin(t: string) {
+  const [h, m] = t.split(":").map(Number);
+  return (h ?? 0) * 60 + (m ?? 0);
+}
+
+export function useOpenStatus() {
+  const [status, setStatus] = useState<{ open: boolean; label: string } | null>(null);
+  useEffect(() => {
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Amsterdam" }));
+    const idx = (now.getDay() + 6) % 7;
+    const today = hours[idx]?.[1] ?? "Gesloten";
+    const cur = now.getHours() * 60 + now.getMinutes();
+    const ranges = today === "Gesloten" ? [] : today.split(" · ").map((r) => r.split("–").map(toMin));
+    const active = ranges.find(([a, b]) => cur >= (a ?? 0) && cur < (b ?? 0));
+    if (active) {
+      const end = today.split(" · ").find((r) => toMin(r.split("–")[0]!) === active[0])!.split("–")[1];
+      setStatus({ open: true, label: `Nu open tot ${end}` });
+    } else setStatus({ open: false, label: "Nu gesloten" });
+  }, []);
+  return status;
+}
+
+export function OpenBadge() {
+  const s = useOpenStatus();
+  return (
+    <span className="inline-flex items-center gap-2 text-sm">
+      <span className={`h-2.5 w-2.5 rounded-full ${s?.open ? "bg-primary" : "bg-destructive"} ${s ? "" : "opacity-0"}`} />
+      {s?.label ?? "\u00a0"}
+    </span>
+  );
+}
+
 export function Header() {
   return (
-    <header className="border-b bg-background">
-      <div className="bg-ink text-ink-foreground text-xs">
-        <div className="container-site flex h-8 items-center justify-between gap-4">
-          <span className="hidden sm:inline">Flyer e-bike specialist · Santpoort-Noord</span>
-          <a href={contact.phoneHref} className="font-semibold hover:underline">Bel {contact.phone}</a>
+    <header className="sticky top-0 z-40 shadow-sm">
+      <div className="hidden bg-ink-2 text-ink-foreground md:block">
+        <div className="container-site flex h-10 items-center justify-between text-sm">
+          {usps.map((u) => (
+            <span key={u} className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" strokeWidth={3} />{u}</span>
+          ))}
         </div>
       </div>
-      <div className="container-site flex h-16 items-center justify-between gap-6">
-        <Link to="/" className="flex items-baseline gap-2">
-          <span className="font-display text-2xl font-bold tracking-tight text-primary">VISSER</span>
-          <span className="font-display text-sm uppercase tracking-[0.2em] text-muted-foreground">Tweewielers</span>
-        </Link>
-        <nav className="flex gap-1 overflow-x-auto text-sm font-medium">
+      <div className="bg-ink text-ink-foreground">
+        <div className="container-site flex h-20 items-center justify-between gap-6">
+          <Link to="/" className="leading-none">
+            <span className="block text-2xl font-black italic tracking-tight">VISSER<span className="text-primary">.</span></span>
+            <span className="text-xs uppercase tracking-[0.25em] opacity-70">Tweewielers · Santpoort</span>
+          </Link>
+          <div className="flex items-center gap-6">
+            <div className="hidden lg:block"><OpenBadge /></div>
+            <a href={contact.mapsHref} target="_blank" rel="noreferrer" className="hidden items-center gap-2 text-sm hover:text-primary sm:flex">
+              <MapPin className="h-5 w-5 text-primary" /> Route
+            </a>
+            <a href={contact.phoneHref} className="flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-accent">
+              <Phone className="h-4 w-4" /> <span className="hidden sm:inline">{contact.phone}</span><span className="sm:hidden">Bel</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <nav className="border-b bg-card">
+        <div className="container-site flex gap-1 overflow-x-auto">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="rounded-sm px-3 py-2 text-foreground/80 hover:bg-secondary hover:text-foreground"
-              activeProps={{ className: "text-primary underline underline-offset-8 decoration-2 decoration-accent" }}
+              activeOptions={{ exact: n.to === "/" }}
+              className="whitespace-nowrap border-b-[3px] border-transparent px-4 py-3.5 text-[15px] text-foreground/80 hover:text-accent"
+              activeProps={{ className: "!border-primary font-medium !text-foreground" }}
             >
               {n.label}
             </Link>
           ))}
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
   );
 }
+
+export { Clock };
 
 export function Footer() {
   return (
