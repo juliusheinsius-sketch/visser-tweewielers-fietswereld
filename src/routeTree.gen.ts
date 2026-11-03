@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EBikesRouteImport } from './routes/e-bikes'
+import { Route as VerhuurRouteImport } from './routes/verhuur'
+import { Route as WerkplaatsRouteImport } from './routes/werkplaats'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EBikesRoute = EBikesRouteImport.update({
+  id: '/e-bikes',
+  path: '/e-bikes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerhuurRoute = VerhuurRouteImport.update({
+  id: '/verhuur',
+  path: '/verhuur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WerkplaatsRoute = WerkplaatsRouteImport.update({
+  id: '/werkplaats',
+  path: '/werkplaats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/e-bikes': typeof EBikesRoute
+  '/verhuur': typeof VerhuurRoute
+  '/werkplaats': typeof WerkplaatsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/e-bikes': typeof EBikesRoute
+  '/verhuur': typeof VerhuurRoute
+  '/werkplaats': typeof WerkplaatsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/e-bikes': typeof EBikesRoute
+  '/verhuur': typeof VerhuurRoute
+  '/werkplaats': typeof WerkplaatsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/contact' | '/e-bikes' | '/verhuur' | '/werkplaats'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/contact' | '/e-bikes' | '/verhuur' | '/werkplaats'
+  id: '__root__' | '/' | '/contact' | '/e-bikes' | '/verhuur' | '/werkplaats'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  EBikesRoute: typeof EBikesRoute
+  VerhuurRoute: typeof VerhuurRoute
+  WerkplaatsRoute: typeof WerkplaatsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/e-bikes': {
+      id: '/e-bikes'
+      path: '/e-bikes'
+      fullPath: '/e-bikes'
+      preLoaderRoute: typeof EBikesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verhuur': {
+      id: '/verhuur'
+      path: '/verhuur'
+      fullPath: '/verhuur'
+      preLoaderRoute: typeof VerhuurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/werkplaats': {
+      id: '/werkplaats'
+      path: '/werkplaats'
+      fullPath: '/werkplaats'
+      preLoaderRoute: typeof WerkplaatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  EBikesRoute: EBikesRoute,
+  VerhuurRoute: VerhuurRoute,
+  WerkplaatsRoute: WerkplaatsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
