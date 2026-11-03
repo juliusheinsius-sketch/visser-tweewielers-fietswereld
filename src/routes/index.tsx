@@ -26,26 +26,43 @@ const services = [
 function Index() {
   return (
     <>
-      <section className="border-b bg-paper">
-        <div className="container-site grid items-center gap-10 py-12 md:grid-cols-[1.1fr_1fr] md:py-20">
-          <div>
-            <p className="eyebrow">Santpoort-Noord · regio IJmond</p>
-            <h1 className="mt-4 text-4xl font-bold leading-[1.05] md:text-6xl">
-              De e-bike specialist van Santpoort.
-            </h1>
-            <p className="mt-5 max-w-lg text-lg text-muted-foreground">
+      <section className="relative overflow-hidden bg-ink">
+        <img src={heroImg} alt="Fietsers op Flyer e-bikes" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="hero-overlay absolute inset-0" />
+        <div className="container-site relative py-20 md:py-28">
+          <div className="max-w-xl text-ink-foreground">
+            <h1 className="text-4xl leading-[1.08] md:text-6xl">De e-bike specialist van Santpoort.</h1>
+            <p className="mt-5 text-lg opacity-90">
               Officieel Flyer-dealer met eigen werkplaats. Kom langs voor advies, een proefrit of onderhoud — u bent welkom zonder afspraak.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/e-bikes" className="inline-flex h-12 items-center rounded-full bg-primary px-6 font-semibold text-primary-foreground hover:bg-primary/90">
+              <Link to="/e-bikes" className="inline-flex h-12 items-center rounded-full bg-primary px-7 font-bold text-primary-foreground hover:bg-accent">
                 Bekijk de e-bikes
               </Link>
-              <a href={contact.phoneHref} className="inline-flex h-12 items-center rounded-full border border-foreground/25 px-6 font-semibold hover:bg-secondary">
-                Bel {contact.phone}
-              </a>
+              <Link to="/verhuur" className="inline-flex h-12 items-center rounded-full border-2 border-ink-foreground/70 px-7 font-bold hover:bg-ink-foreground/10">
+                E-bike huren
+              </Link>
             </div>
           </div>
-          <img src={heroImg} alt="Flyer e-bikes in de showroom" className="aspect-square w-full border object-cover" />
+        </div>
+      </section>
+
+      <section className="container-site relative z-10 -mt-10">
+        <div className="grid gap-4 bg-card p-4 shadow-lg sm:grid-cols-3 md:p-6">
+          {quick.map((q) => (
+            <Link key={q.to} to={q.to} className="group relative block aspect-[16/9] overflow-hidden">
+              <img src={q.img} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-ink/45 transition-colors group-hover:bg-ink/30" />
+              <span className="absolute inset-x-0 top-4 text-center text-2xl font-bold italic text-ink-foreground">{q.label}</span>
+              <span className="absolute inset-x-0 bottom-3 text-center text-sm text-ink-foreground/90">{q.sub} →</span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+          <OpenBadge />
+          <a href={contact.mapsHref} target="_blank" rel="noreferrer" className="font-medium text-accent hover:underline">
+            {contact.street}, Santpoort-Noord →
+          </a>
         </div>
       </section>
 
