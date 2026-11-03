@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BikeCard, HoursTable } from "@/components/site-chrome";
+import { BikeCard, HoursTable, OpenBadge } from "@/components/site-chrome";
 import { advancedImg, bikes, contact, heroImg, starlyImg } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -22,6 +22,12 @@ const services = [
   { n: "03", t: "Verhuur", d: "Elektrische huurfietsen voor een dag of langer, om de duinen en de IJmond te verkennen." },
   { n: "04", t: "Werkplaats", d: "Onderhoud en reparatie van alle merken fietsen en e-bikes. Leenfiets beschikbaar." },
 ];
+
+const quick = [
+  { to: "/e-bikes", label: "E-bikes", sub: "Bekijk het aanbod", img: advancedImg },
+  { to: "/verhuur", label: "Verhuur", sub: "Huur een e-bike", img: starlyImg },
+  { to: "/werkplaats", label: "Werkplaats", sub: "Onderhoud & reparatie", img: heroImg },
+] as const;
 
 function Index() {
   return (
