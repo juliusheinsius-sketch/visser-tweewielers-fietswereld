@@ -9,6 +9,8 @@ export const Route = createFileRoute("/e-bikes")({
       { name: "description", content: "Bekijk ons aanbod e-bikes van Flyer, Advanced en Gocycle. Proefrijden in Santpoort-Noord." },
       { property: "og:title", content: "E-bikes | Visser Tweewielers" },
       { property: "og:description", content: "Flyer, Advanced en Gocycle e-bikes in Santpoort-Noord." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,

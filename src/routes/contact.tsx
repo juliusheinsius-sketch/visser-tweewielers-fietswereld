@@ -9,6 +9,8 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Visser Tweewielers, Hoofdstraat 214, Santpoort-Noord. Telefoon en openingstijden." },
       { property: "og:title", content: "Contact | Visser Tweewielers" },
       { property: "og:description", content: "Adres, telefoon en openingstijden van Visser Tweewielers." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
