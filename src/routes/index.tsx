@@ -37,10 +37,10 @@ function Index() {
               Officieel Flyer-dealer met eigen werkplaats. Kom langs voor advies, een proefrit of onderhoud — u bent welkom zonder afspraak.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/e-bikes" className="inline-flex h-12 items-center rounded-sm bg-primary px-6 font-semibold text-primary-foreground hover:bg-primary/90">
+              <Link to="/e-bikes" className="inline-flex h-12 items-center rounded-full bg-primary px-6 font-semibold text-primary-foreground hover:bg-primary/90">
                 Bekijk de e-bikes
               </Link>
-              <a href={contact.phoneHref} className="inline-flex h-12 items-center rounded-sm border border-foreground/25 px-6 font-semibold hover:bg-secondary">
+              <a href={contact.phoneHref} className="inline-flex h-12 items-center rounded-full border border-foreground/25 px-6 font-semibold hover:bg-secondary">
                 Bel {contact.phone}
               </a>
             </div>
@@ -100,8 +100,8 @@ function Index() {
               Parkeren kan voor de deur. Wilt u een specifieke fiets proefrijden? Bel even, dan zorgen we dat hij klaarstaat met een volle accu.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={contact.mapsHref} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-sm bg-accent px-5 font-semibold text-accent-foreground hover:bg-accent/90">Routebeschrijving</a>
-              <Link to="/contact" className="inline-flex h-11 items-center rounded-sm border px-5 font-semibold hover:bg-secondary">Contact</Link>
+              <a href={contact.mapsHref} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-full bg-accent px-5 font-semibold text-accent-foreground hover:bg-accent/90">Routebeschrijving</a>
+              <Link to="/contact" className="inline-flex h-11 items-center rounded-full border px-5 font-semibold hover:bg-secondary">Contact</Link>
             </div>
           </div>
           <div>

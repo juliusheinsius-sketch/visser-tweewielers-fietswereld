@@ -40,7 +40,7 @@ function Page() {
         </dl>
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-l-4 border-accent bg-paper p-6 md:flex-row md:items-center">
           <p className="font-medium">Afspraak maken voor onderhoud? Bel ons, dan plannen we een moment dat u uitkomt.</p>
-          <a href={contact.phoneHref} className="inline-flex h-11 shrink-0 items-center rounded-sm bg-primary px-5 font-semibold text-primary-foreground hover:bg-primary/90">Bel {contact.phone}</a>
+          <a href={contact.phoneHref} className="inline-flex h-11 shrink-0 items-center rounded-full bg-primary px-5 font-semibold text-primary-foreground hover:bg-primary/90">Bel {contact.phone}</a>
         </div>
       </section>
     </>

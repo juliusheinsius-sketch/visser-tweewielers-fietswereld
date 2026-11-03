@@ -31,7 +31,7 @@ function Page() {
             <li><span className="font-semibold text-foreground">2.</span> Neem bij ophalen een geldig legitimatiebewijs mee.</li>
             <li><span className="font-semibold text-foreground">3.</span> We stellen de fiets voor u af en leggen de bediening uit.</li>
           </ol>
-          <a href={contact.phoneHref} className="mt-6 flex h-11 items-center justify-center rounded-sm bg-primary font-semibold text-primary-foreground hover:bg-primary/90">
+          <a href={contact.phoneHref} className="mt-6 flex h-11 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground hover:bg-primary/90">
             Bel {contact.phone}
           </a>
         </aside>
